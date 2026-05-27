@@ -672,7 +672,12 @@
       font-size: 16px;
     }
 
-    .about-layout { display: grid; grid-template-columns: .95fr 1.05fr; gap: 28px; align-items: stretch; }
+    .about-layout {
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: 28px;
+      align-items: stretch;
+    }
     .glass-card, .project-card, .skill-card, .cert-card, .patent-card, .contact-card, .timeline-item, .education-card {
       position: relative;
       overflow: hidden;
@@ -682,38 +687,80 @@
       box-shadow: var(--shadow);
       backdrop-filter: blur(18px);
     }
-    .about-photo-card { padding: 18px; min-height: 100%; }
+    .about-photo-card {
+      padding: 26px;
+      min-height: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
     .about-photo-frame {
       position: relative;
-      overflow: hidden;
-      border-radius: 24px;
-      min-height: 420px;
+      overflow: visible;
+      width: 240px;
+      height: 240px;
+      min-height: unset;
+      border-radius: 50%;
       background:
-        radial-gradient(circle at 30% 10%, rgba(0,231,255,.2), transparent 32%),
-        linear-gradient(135deg, rgba(139,92,246,.22), rgba(255,77,141,.13));
+        radial-gradient(circle at 30% 10%, rgba(0,231,255,.35), transparent 35%),
+        linear-gradient(135deg, rgba(139,92,246,.28), rgba(255,77,141,.18));
       display: grid;
       place-items: center;
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,.14),
+        0 24px 70px rgba(0,0,0,.36),
+        0 0 45px rgba(0,231,255,.18),
+        0 0 65px rgba(255,77,141,.14);
+    }
+    .about-photo-frame::before {
+      content: "";
+      position: absolute;
+      inset: -8px;
+      border-radius: 50%;
+      background: conic-gradient(from 180deg, var(--cyan), var(--primary), var(--pink), var(--cyan));
+      z-index: -1;
+      filter: blur(.2px);
+      animation: spin 8s linear infinite;
+    }
+    .about-photo-frame::after {
+      content: "";
+      position: absolute;
+      inset: -24px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,231,255,.16), transparent 62%);
+      z-index: -2;
+      animation: pulse 2.8s ease-in-out infinite;
     }
     .about-photo-frame img {
       width: 100%;
       height: 100%;
+      border-radius: 50%;
       object-fit: cover;
-      object-position: center;
-      transition: transform .7s var(--ease), filter .3s ease;
+      object-position: center 18%;
+      border: 6px solid rgba(255,255,255,.12);
+      transition: transform .7s var(--ease), filter .3s ease, box-shadow .3s ease;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.16);
     }
-    .about-photo-frame:hover img { transform: scale(1.05); filter: saturate(1.1); }
+    .about-photo-frame:hover img {
+      transform: scale(1.04);
+      filter: saturate(1.08) contrast(1.04);
+    }
     .photo-tag {
       position: absolute;
-      left: 18px;
-      bottom: 18px;
+      left: 50%;
+      bottom: -42px;
+      transform: translateX(-50%);
+      width: max-content;
+      max-width: 260px;
       padding: 10px 14px;
       border-radius: 999px;
-      background: rgba(0,0,0,.5);
+      background: rgba(0,0,0,.45);
       color: #fff;
-      backdrop-filter: blur(12px);
+      backdrop-filter: blur(14px);
       font-size: 12px;
       font-weight: 700;
-      border: 1px solid rgba(255,255,255,.13);
+      border: 1px solid rgba(255,255,255,.14);
+      box-shadow: 0 14px 34px rgba(0,0,0,.24);
     }
     .about-content { padding: 30px; }
     .about-content h3 { font-size: 26px; letter-spacing: -0.03em; margin-bottom: 16px; }
@@ -1019,6 +1066,7 @@
     @media (max-width: 980px) {
       .hero-grid, .about-layout, .contact-grid, .split-grid { grid-template-columns: 1fr; }
       .hero { padding-top: 120px; }
+      .about-photo-card { min-height: 330px; }
       .hero-visual { min-height: 530px; order: -1; }
       .stats-grid, .skills-grid, .education-grid, .patent-grid { grid-template-columns: repeat(2, 1fr); }
       .projects-grid, .cert-grid { grid-template-columns: 1fr; }
@@ -1049,6 +1097,8 @@
 
     @media (max-width: 680px) {
       .container { width: min(100% - 28px, var(--max)); }
+      .about-photo-frame { width: 210px; height: 210px; }
+      .photo-tag { bottom: -38px; font-size: 11px; }
       .hero { min-height: auto; padding-bottom: 58px; }
       .hero-grid { gap: 28px; }
       .hero-visual { min-height: 430px; }
@@ -1253,7 +1303,7 @@
             <span class="project-status">Hidden Project • Details on request</span>
             <div class="project-top"><div><h3>Java Major Project</h3><div class="project-meta">Java-based Academic Project • Private Repository</div></div><div class="project-icon">JV</div></div>
             <p>Included as a confidential Java-focused major project. Presented without exposing source code or sensitive details, while highlighting Java, OOP and database-oriented development practice.</p>
-            <div class="tags"><span class="tag">Java</span><span class="tag">OOP</span><span class="tag">DBMS</span><span class="tag">SQL</span><span class="tag">Private Repo</span></div>
+            <div class="tags"><span class="tag">Java</span><span class="tag">Spring Boot</span><span class="tag">Private Repo</span></div>
           </article>
         </div>
       </div>
